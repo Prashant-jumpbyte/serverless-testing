@@ -9,34 +9,13 @@ on:
   pull_request:
     branches: [ main ]
 
-# jobs:
-#   build:
-
-#     runs-on: ubuntu-latest
-
-#     strategy:
-#       matrix:
-#         node-version: [12.x, 14.x, 16.x]
-#         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Use Node.js ${{ matrix.node-version }}
-#       uses: actions/setup-node@v2
-#       with:
-#         node-version: ${{ matrix.node-version }}
-#         cache: 'npm'
-#     - run: npm ci
-# #     - run: npm run build --if-present
-#     - run: npm test
-
 jobs:
   test:
     name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: [12]
+        node_version: [12, 14, 16]
         os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
@@ -45,19 +24,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node_version }}
-    
-#     - name: set environment variables
-#       uses: allenevans/set-env@v2.0.0
-#       with:
-#         WORLD_FUNC: world
-#         LAMBDA_ENDPOINT: http://localhost:4001
-#         AWS_REGION: us-east-1
-#         IS_OFFLINE: true
 
-    - name: Create .env 🤫
+    - name: Create .env file
       uses: DeveloperRic/action-create-env@v1.0.2 # set this to the version of your choice
       with:
-      # Write your content here if you want. The content will be trimmed & dedent will be applied.
         full_text: |
           WORLD_FUNC=world
           LAMBDA_ENDPOINT=http://localhost:4001
