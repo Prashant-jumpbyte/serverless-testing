@@ -49,7 +49,9 @@ jobs:
     - name: set environment variables
       uses: allenevans/set-env@v2.0.0
       with:
-        WORLD_FUNC: 'world'
+        WORLD_FUNC: world
+        LAMBDA_ENDPOINT: http://localhost:4000
+        AWS_REGION: us-east-1
           
     - name: npm install, build and test
       run: |
