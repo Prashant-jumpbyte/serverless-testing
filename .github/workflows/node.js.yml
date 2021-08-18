@@ -45,7 +45,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node_version }}
-
+    
+    - name: set environment variables
+      uses: allenevans/set-env@v2.0.0
+      with:
+        WORLD_FUNC: 'world'
+          
     - name: npm install, build and test
       run: |
         npm install
